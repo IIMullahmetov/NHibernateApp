@@ -21,13 +21,12 @@ namespace NHibernateApp.Models
 		}
 		public void ReadFromFile(string path)
 		{
-			XmlRepository repository = null;
+			XmlRepository repository = new XmlRepository();
 			ISession session = null;
 			try
 			{
 				session = NHibernateSession.OpenSession();
 				logger.Info(session);
-				repository = new XmlRepository();
 				foreach (Student student in repository.GetStudents(path))
 				{
 					if (session.QueryOver<Student>().Where(s => s.Email == student.Email) == null)
